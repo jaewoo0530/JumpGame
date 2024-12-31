@@ -1,0 +1,15 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+Assets/Pixel Adventure 1*
+UserSettings/
+MemoryCaptures/
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.sln
+*.user
