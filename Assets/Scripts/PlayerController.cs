@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 3f;   // 최대 속도
     public float jumpForce = 4f;
+    public float jumpcount = 0f;
     private Rigidbody2D playerRigidbody2D;
     private bool isGrounded;
     private Animator playeranimator;
@@ -49,14 +50,25 @@ public class PlayerController : MonoBehaviour
         {
             // 낙하: y 속도가 음수일 때, 즉 아래로 떨어질 때
             playeranimator.SetBool("Jump", false);
+            playeranimator.SetBool("DoubleJump", false);
             playeranimator.SetBool("Fall", true);
         }
         else if (isGrounded)
         {
             // 땅에 있을 때 Jump 애니메이션을 false로 설정
             playeranimator.SetBool("Jump", false);
+            playeranimator.SetBool("DoubleJump", false);
             playeranimator.SetBool("Fall", false);
+            jumpcount = 0;
         }
+        
+        if(Input.GetKeyDown(KeyCode.Space) && !isGrounded && jumpcount == 0)
+        {
+            playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
+            playeranimator.SetBool("DoubleJump", true);
+            jumpcount++;
+        }
+
         if (Input.GetKeyUp(KeyCode.Space) && playerRigidbody2D.velocity.y > 0)
         {
             playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, playerRigidbody2D.velocity.y * 0.5f);
