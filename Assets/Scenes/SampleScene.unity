@@ -227,9 +227,10 @@ GameObject:
   - component: {fileID: 772506568}
   - component: {fileID: 772506571}
   - component: {fileID: 772506572}
+  - component: {fileID: 772506573}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -384,6 +385,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &772506573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772506567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f159a1573418d4c46868f8b1d526e70d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  jumpForce: 4
 --- !u!1001 &7684971772400059276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -435,6 +450,10 @@ PrefabInstance:
     - target: {fileID: 8406893501393434062, guid: f9cec0da869b80c44a250a47ca158148, type: 3}
       propertyPath: m_Name
       value: Grass Block
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406893501393434062, guid: f9cec0da869b80c44a250a47ca158148, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
