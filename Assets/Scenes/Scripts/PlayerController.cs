@@ -41,7 +41,21 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
+            // 점프: 현재 수평 속도는 유지하고, 점프 힘만 y축에 적용
             playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
+            playeranimator.SetBool("Jump", true);
+        }
+        else if (playerRigidbody2D.velocity.y < 0 && !isGrounded)
+        {
+            // 낙하: y 속도가 음수일 때, 즉 아래로 떨어질 때
+            playeranimator.SetBool("Jump", false);
+            playeranimator.SetBool("Fall", true);
+        }
+        else if (isGrounded)
+        {
+            // 땅에 있을 때 Jump 애니메이션을 false로 설정
+            playeranimator.SetBool("Jump", false);
+            playeranimator.SetBool("Fall", false);
         }
         if (Input.GetKeyUp(KeyCode.Space) && playerRigidbody2D.velocity.y > 0)
         {
