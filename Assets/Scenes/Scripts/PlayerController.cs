@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 4f;
     private Rigidbody2D playerRigidbody2D;
     private bool isGrounded;
+    private Animator playeranimator;
 
     private void Awake()
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
+        playeranimator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -25,6 +27,14 @@ public class PlayerController : MonoBehaviour
         float xInput = Input.GetAxis("Horizontal");
         Vector2 move = new Vector2(xInput * speed, playerRigidbody2D.velocity.y);
         playerRigidbody2D.velocity = move;
+        if(xInput != 0)
+        {
+            playeranimator.SetBool("Run", true);
+        }
+        else
+        {
+            playeranimator.SetBool("Run", false);
+        }
     }
 
     private void Jump()
