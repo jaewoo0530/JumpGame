@@ -95,9 +95,9 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Dead"))
+        if (other.gameObject.CompareTag("DeadObject"))
         {
-            Die();
+            playeranimator.SetTrigger("Die");
         }
     }
 
