@@ -53,14 +53,6 @@ public class PlayerController : MonoBehaviour
             playeranimator.SetBool("DoubleJump", false);
             playeranimator.SetBool("Fall", true);
         }
-        else if (isGrounded)
-        {
-            // 땅에 있을 때 Jump 애니메이션을 false로 설정
-            playeranimator.SetBool("Jump", false);
-            playeranimator.SetBool("DoubleJump", false);
-            playeranimator.SetBool("Fall", false);
-            jumpcount = 0;
-        }
         
         if(Input.GetKeyDown(KeyCode.Space) && !isGrounded && jumpcount == 0)
         {
@@ -82,6 +74,10 @@ public class PlayerController : MonoBehaviour
             if (collision.gameObject.CompareTag("Ground"))
             {
                 isGrounded = true;
+                jumpcount = 0;
+                playeranimator.SetBool("Fall", false);
+                playeranimator.SetBool("Jump", false);
+                playeranimator.SetBool("DoubleJump", false);
             }
         }
     }
