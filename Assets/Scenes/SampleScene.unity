@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 772506571}
   - component: {fileID: 772506572}
   - component: {fileID: 772506573}
+  - component: {fileID: 772506574}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -400,6 +401,79 @@ MonoBehaviour:
   speed: 3
   jumpForce: 4
   jumpcount: 0
+--- !u!114 &772506574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772506567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2c0733e97e0ee469b481f34d9524f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  rayLength: 1
+--- !u!1001 &1600224554275251081
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1907154868515866771, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.149
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907154868515866771, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.829
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907154868515866771, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907154868515866771, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907154868515866771, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907154868515866771, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907154868515866771, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907154868515866771, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907154868515866771, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907154868515866771, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4793995423580921712, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
+      propertyPath: m_Name
+      value: Saw
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb4e6faef39f3304da26393bbe19f118, type: 3}
 --- !u!1001 &7684971772400059276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -408,6 +482,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 673905086944799580, guid: f9cec0da869b80c44a250a47ca158148, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2478963119499918467, guid: f9cec0da869b80c44a250a47ca158148, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5866144469371015634, guid: f9cec0da869b80c44a250a47ca158148, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -448,6 +530,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6677707805202996081, guid: f9cec0da869b80c44a250a47ca158148, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7451771121899448996, guid: f9cec0da869b80c44a250a47ca158148, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -455,6 +541,10 @@ PrefabInstance:
     - target: {fileID: 8406893501393434062, guid: f9cec0da869b80c44a250a47ca158148, type: 3}
       propertyPath: m_Name
       value: Grass Block
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406893501393434062, guid: f9cec0da869b80c44a250a47ca158148, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8406893501393434062, guid: f9cec0da869b80c44a250a47ca158148, type: 3}
       propertyPath: m_TagString
@@ -472,3 +562,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 772506570}
   - {fileID: 7684971772400059276}
+  - {fileID: 1600224554275251081}
