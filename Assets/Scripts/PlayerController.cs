@@ -93,4 +93,16 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Dead"))
+        {
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }
