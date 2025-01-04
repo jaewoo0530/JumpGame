@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
             playeranimator.SetBool("DoubleJump", true);
             jumpcount++;
-        }
+        } 
 
         if (Input.GetKeyUp(KeyCode.Space) && playerRigidbody2D.velocity.y > 0)
         {
