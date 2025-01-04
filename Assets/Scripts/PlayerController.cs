@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         }
         else if(item != null)
         {
-            item.Use(gameObject);
+            item.Use();
             jumpcount = 0;
         }
     }
