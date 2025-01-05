@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class OnemoreJump : MonoBehaviour, IItem
 {
+    private PlayerController player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerController>();
+    }
+
     public void Use()
     {
-        Debug.Log("점프 횟수 증가");
+        if (player != null)
+        {
+            player.IncreaseJumpCount(0);
+        }
+        Debug.Log("점프 재사용 가능");
         Destroy(gameObject);
     }
+
 }
 

@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 3f;   // 최대 속도
     public float jumpForce = 4f;
-    public float jumpcount = 0f;
+    public float jumpCount = 0f;
     private Rigidbody2D playerRigidbody2D;
     private bool isGrounded;
     private Animator playeranimator;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
             // 점프: 현재 수평 속도는 유지하고, 점프 힘만 y축에 적용
             playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
             playeranimator.SetBool("Jump", true);
-            jumpcount++;
+            IncreaseJumpCount(1);
         }
         else if (playerRigidbody2D.velocity.y < 0 && !isGrounded)
         {
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
             playeranimator.SetBool("Fall", true);
         }
         
-        if(Input.GetKeyDown(KeyCode.Space) && !isGrounded && jumpcount == 0)
+        if(Input.GetKeyDown(KeyCode.Space) && !isGrounded && jumpCount == 0)
         {
             playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
             playeranimator.SetBool("DoubleJump", true);
@@ -98,12 +98,16 @@ public class PlayerController : MonoBehaviour
         else if(item != null)
         {
             item.Use();
-            jumpcount = 0;
         }
     }
 
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void IncreaseJumpCount(int amount)
+    {
+        jumpCount = amount;
     }
 }
