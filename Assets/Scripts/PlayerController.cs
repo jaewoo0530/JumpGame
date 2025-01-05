@@ -4,62 +4,69 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Settings")]
     public float speed = 3f;   // 최대 속도
     public float jumpForce = 4f;
-    public float jumpCount = 0f;
+    private float jumpCount = 0f;
+
     private Rigidbody2D playerRigidbody2D;
+    private Animator playerAnimator;
     private bool isGrounded;
-    private Animator playeranimator;
+
+    public float JumpCount
+    {
+        get => jumpCount; // 점프 횟수 가져오기
+        set
+        {
+            jumpCount = Mathf.Max(0, value); // 음수 방지
+            Debug.Log($"점프 횟수가 설정되었습니다: 현재 점프 횟수 = {jumpCount}");
+        }
+    }
 
     private void Awake()
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
-        playeranimator = GetComponent<Animator>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        Move();
-        Jump();
+        HandleMovement();
+        HandleJump();
     }
 
-    private void Move()
+    private void HandleMovement()
     {
         float xInput = Input.GetAxis("Horizontal");
         Vector2 move = new Vector2(xInput * speed, playerRigidbody2D.velocity.y);
         playerRigidbody2D.velocity = move;
-        if(xInput != 0)
-        {
-            playeranimator.SetBool("Run", true);
-        }
-        else
-        {
-            playeranimator.SetBool("Run", false);
-        }
+
+        playerAnimator.SetBool("Run", xInput != 0);
     }
 
-    private void Jump()
+    private void HandleJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            // 점프: 현재 수평 속도는 유지하고, 점프 힘만 y축에 적용
-            playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
-            playeranimator.SetBool("Jump", true);
+            if (isGrounded)
+            {
+                PerformJump();
+                playerAnimator.SetBool("Jump", true);
+            }
+            else if (jumpCount > 0)
+            {
+                PerformJump();
+                playerAnimator.SetBool("DoubleJump", true);
+                JumpCount -= 1;
+            }
         }
-        else if (playerRigidbody2D.velocity.y < 0 && !isGrounded)
+
+        if (playerRigidbody2D.velocity.y < 0 && !isGrounded)
         {
-            // 낙하: y 속도가 음수일 때, 즉 아래로 떨어질 때
-            playeranimator.SetBool("Jump", false);
-            playeranimator.SetBool("DoubleJump", false);
-            playeranimator.SetBool("Fall", true);
+            playerAnimator.SetBool("Jump", false);
+            playerAnimator.SetBool("DoubleJump", false);
+            playerAnimator.SetBool("Fall", true);
         }
-        
-        if(Input.GetKeyDown(KeyCode.Space) && !isGrounded && jumpCount != 0)
-        {
-            playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
-            playeranimator.SetBool("DoubleJump", true);
-            JumpCount -= 1;
-        } 
 
         if (Input.GetKeyUp(KeyCode.Space) && playerRigidbody2D.velocity.y > 0)
         {
@@ -67,17 +74,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void PerformJump()
+    {
+        playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.contacts[0].normal.y > 0.7f)
+        if (collision.contacts[0].normal.y > 0.7f && collision.gameObject.CompareTag("Ground"))
         {
-            if (collision.gameObject.CompareTag("Ground"))
-            {
-                isGrounded = true;
-                playeranimator.SetBool("Fall", false);
-                playeranimator.SetBool("Jump", false);
-                playeranimator.SetBool("DoubleJump", false);
-            }
+            isGrounded = true;
+            playerAnimator.SetBool("Fall", false);
+            playerAnimator.SetBool("Jump", false);
+            playerAnimator.SetBool("DoubleJump", false);
         }
     }
 
@@ -88,14 +97,14 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        IItem item = other.GetComponent<IItem>();
-        if (other.gameObject.CompareTag("DeadObject"))
+        if (other.CompareTag("DeadObject"))
         {
-            playeranimator.SetTrigger("Die");
+            playerAnimator.SetTrigger("Die");
         }
-        else if(item != null)
+        else if (other.TryGetComponent<IItem>(out var item))
         {
             item.Use();
         }
@@ -104,19 +113,5 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
-    }
-
-    public float JumpCount
-    {
-        get => jumpCount; // 점프 횟수 가져오기
-        set
-        {
-            jumpCount = value; // 점프 횟수 설정
-            if(jumpCount < 0)
-            {
-                jumpCount = 0;
-            }
-            Debug.Log($"점프 횟수가 설정되었습니다: 현재 점프 횟수 = {jumpCount}");
-        }
     }
 }
