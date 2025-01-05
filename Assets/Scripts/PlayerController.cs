@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 3f;   // 최대 속도
     public float jumpForce = 4f;
-    public float jumpCount = 1f;
+    public float jumpCount = 0f;
     private Rigidbody2D playerRigidbody2D;
     private bool isGrounded;
     private Animator playeranimator;
@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
             // 점프: 현재 수평 속도는 유지하고, 점프 힘만 y축에 적용
             playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
             playeranimator.SetBool("Jump", true);
-            JumpCount -= 1;
         }
         else if (playerRigidbody2D.velocity.y < 0 && !isGrounded)
         {
