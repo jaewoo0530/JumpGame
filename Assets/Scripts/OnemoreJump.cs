@@ -15,7 +15,7 @@ public class OnemoreJump : MonoBehaviour, IItem
     {
         if (player != null)
         {
-            player.IncreaseJumpCount(0);
+            player.JumpCount += 1;
         }
         Debug.Log("점프 재사용 가능");
         Destroy(gameObject);
