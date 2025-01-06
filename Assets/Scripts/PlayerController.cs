@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRigidbody2D;
     private Animator playerAnimator;
     private bool isGrounded;
+    private Player player;
 
     public float JumpCount
     {
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+        player = GetComponent<Player>();
     }
 
     private void Update()
@@ -108,10 +110,5 @@ public class PlayerController : MonoBehaviour
         {
             item.Use();
         }
-    }
-
-    public void Die()
-    {
-        Destroy(gameObject);
     }
 }
