@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Transform respawnPoint; // 리스폰 위치
-
     public void RespawnPlayer()
     {
         // 새로운 플레이어 인스턴스 생성
