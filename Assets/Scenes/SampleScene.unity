@@ -428,10 +428,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5697191594171448969, guid: 8c315966f9d2baa4b91ad1cc13b42069, type: 3}
-      propertyPath: playerPrefab
-      value: 
-      objectReference: {fileID: 7754406351663182014, guid: 8c315966f9d2baa4b91ad1cc13b42069, type: 3}
-    - target: {fileID: 5697191594171448969, guid: 8c315966f9d2baa4b91ad1cc13b42069, type: 3}
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 1474082845}
