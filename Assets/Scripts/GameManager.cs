@@ -24,6 +24,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // 게임 시작 시 첫 번째 플레이어 생성
+        if (respawnPoint == null)
+        {
+            GameObject defaultRespawnPoint = new GameObject("DefaultRespawnPoint");
+            defaultRespawnPoint.transform.position = new Vector3(0f, 0f, 0f);
+            respawnPoint = defaultRespawnPoint.transform;
+        }
         RespawnPlayer();
     }
 
