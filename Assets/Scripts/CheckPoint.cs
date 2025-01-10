@@ -22,4 +22,11 @@ public class CheckPoint : MonoBehaviour
         checkpointAnimator.SetBool("Idle", true);
         checkpointAnimator.SetBool("Activate", false);
     }
+
+    public void Deactivate()
+    {
+        // 체크포인트 비활성화 애니메이션
+        checkpointAnimator.SetBool("Activate", false);
+        checkpointAnimator.SetBool("Deactivate", true); // 비활성화 애니메이션
+    }
 }

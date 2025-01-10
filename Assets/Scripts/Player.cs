@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     private Animator playerAnimator;
     private CheckPoint checkPoint;
+    private CheckPoint previousCheckpoint;
 
     private void Awake()
     {
@@ -28,7 +29,20 @@ public class Player : MonoBehaviour
         }
         else if (other.CompareTag("RespawnPoint"))
         {
+            // 기존 체크포인트 비활성화
+            if (previousCheckpoint != null)
+            {
+                previousCheckpoint.Deactivate();
+            }
+
+            // 새로운 체크포인트 활성화
             checkPoint.Save();
+
+            // 이전 체크포인트 업데이트
+            previousCheckpoint = checkPoint;
+
+            // 새로운 체크포인트를 찾음
+            checkPoint = other.GetComponent<CheckPoint>();
         }
     }
     public void Die()

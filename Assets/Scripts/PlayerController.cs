@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D playerRigidbody2D;
     private Animator playerAnimator;
-    private Player player;
     private GroundCheck groundCheck;
 
     public float JumpCount
@@ -28,7 +27,6 @@ public class PlayerController : MonoBehaviour
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
-        player = GetComponent<Player>();
         groundCheck = GetComponent<GroundCheck>();
     }
 
