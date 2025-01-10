@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     private Player player;
     private GroundCheck groundCheck;
+    private CheckPoint checkPoint;
 
     public float JumpCount
     {
@@ -30,6 +31,11 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         player = GetComponent<Player>();
         groundCheck = GetComponent<GroundCheck>();
+        checkPoint = FindAnyObjectByType<CheckPoint>();
+        if (checkPoint != null) 
+        {
+            Debug.Log("Success");
+        }
     }
 
     private void Update()
@@ -98,6 +104,10 @@ public class PlayerController : MonoBehaviour
         else if (other.TryGetComponent<IItem>(out var item))
         {
             item.Use();
+        }
+        else if(other.CompareTag("RespawnPoint"))
+        {
+            checkPoint.test();
         }
     }
 }
