@@ -36,12 +36,6 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleJump();
-
-        // GroundCheck에서 isGrounded 상태 확인
-        if (groundCheck.IsGrounded && jumpCount == 0)
-        {
-            JumpCount = 1; // 땅에 닿았을 때 점프 횟수 초기화
-        }
     }
 
     private void HandleMovement()
@@ -80,6 +74,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && playerRigidbody2D.velocity.y > 0)
         {
             playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, playerRigidbody2D.velocity.y * 0.5f);
+        }
+
+        if(groundCheck.IsGrounded)
+        {
+            playerAnimator.SetBool("Jump", false);
+            playerAnimator.SetBool("DoubleJump", false);
+            playerAnimator.SetBool("Fall", false);
         }
     }
 
