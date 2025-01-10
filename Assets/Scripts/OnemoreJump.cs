@@ -6,13 +6,10 @@ public class OnemoreJump : MonoBehaviour, IItem
 {
     private PlayerController player;
 
-    private void Start()
-    {
-        player = FindObjectOfType<PlayerController>();
-    }
 
     public void Use()
     {
+        player = FindObjectOfType<PlayerController>();
         if (player != null)
         {
             player.JumpCount += 1;
