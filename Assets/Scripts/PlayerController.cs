@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D playerRigidbody2D;
     private Animator playerAnimator;
-    private bool isGrounded;
     private Player player;
+    private GroundCheck groundCheck;
 
     public float JumpCount
     {
@@ -29,12 +29,19 @@ public class PlayerController : MonoBehaviour
         playerRigidbody2D = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
         player = GetComponent<Player>();
+        groundCheck = GetComponent<GroundCheck>();
     }
 
     private void Update()
     {
         HandleMovement();
         HandleJump();
+
+        // GroundCheck에서 isGrounded 상태 확인
+        if (groundCheck.IsGrounded && jumpCount == 0)
+        {
+            JumpCount = 1; // 땅에 닿았을 때 점프 횟수 초기화
+        }
     }
 
     private void HandleMovement()
@@ -50,7 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isGrounded)
+            if (groundCheck.IsGrounded)
             {
                 PerformJump();
                 playerAnimator.SetBool("Jump", true);
@@ -63,7 +70,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (playerRigidbody2D.velocity.y < 0 && !isGrounded)
+        if (playerRigidbody2D.velocity.y < 0 && !groundCheck.IsGrounded)
         {
             playerAnimator.SetBool("Jump", false);
             playerAnimator.SetBool("DoubleJump", false);
@@ -79,25 +86,6 @@ public class PlayerController : MonoBehaviour
     private void PerformJump()
     {
         playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.contacts[0].normal.y > 0.7f && collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            playerAnimator.SetBool("Fall", false);
-            playerAnimator.SetBool("Jump", false);
-            playerAnimator.SetBool("DoubleJump", false);
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
