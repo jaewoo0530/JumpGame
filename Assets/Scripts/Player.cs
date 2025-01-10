@@ -8,12 +8,12 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerAnimator = GetComponent<Animator>();
+        checkPoint = FindAnyObjectByType<CheckPoint>();
     }
     public void RespawnPlayer()
     {
         // 새로운 플레이어 인스턴스 생성
         GameManager.Instance.RespawnPlayer();
-        checkPoint = FindAnyObjectByType<CheckPoint>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
