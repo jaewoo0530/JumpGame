@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnimator;
     private Player player;
     private GroundCheck groundCheck;
-    private CheckPoint checkPoint;
 
     public float JumpCount
     {
@@ -31,11 +30,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         player = GetComponent<Player>();
         groundCheck = GetComponent<GroundCheck>();
-        checkPoint = FindAnyObjectByType<CheckPoint>();
-        if (checkPoint != null) 
-        {
-            Debug.Log("Success");
-        }
     }
 
     private void Update()
@@ -93,21 +87,5 @@ public class PlayerController : MonoBehaviour
     private void PerformJump()
     {
         playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, jumpForce);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("DeadObject"))
-        {
-            playerAnimator.SetTrigger("Die");
-        }
-        else if (other.TryGetComponent<IItem>(out var item))
-        {
-            item.Use();
-        }
-        else if(other.CompareTag("RespawnPoint"))
-        {
-            checkPoint.test();
-        }
     }
 }
