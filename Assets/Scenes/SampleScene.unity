@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0, z: -3}
   smoothSpeed: 100
 --- !u!1001 &560814014
 PrefabInstance:
