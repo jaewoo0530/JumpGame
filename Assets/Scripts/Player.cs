@@ -10,6 +10,15 @@ public class Player : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        FollowPlayerCamera cameraScript = FindObjectOfType<FollowPlayerCamera>();
+        if (cameraScript != null)
+        {
+            cameraScript.SetPlayerTransform(transform);
+        }
+    }
+
     public void RespawnPlayer()
     {
         // 새로운 플레이어 인스턴스 생성
