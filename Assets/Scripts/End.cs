@@ -13,5 +13,6 @@ public class End : MonoBehaviour
     public void EndPressed()
     {
         endAnimator.SetBool("Pressed", true);
+        Debug.Log("End stage");
     }
 }
