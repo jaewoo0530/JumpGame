@@ -58,7 +58,6 @@ public class Player : MonoBehaviour
         else if (other.CompareTag("End"))
         {
             End end = other.GetComponent<End>();
-            Debug.Log("a");
             if (end != null)
             {
                 end.EndPressed();
