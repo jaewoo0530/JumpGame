@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class End : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Animator endAnimator;
+    private void Awake()
     {
-        
+        endAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EndPressed()
     {
-        
+        endAnimator.SetBool("Pressed", true);
     }
 }
