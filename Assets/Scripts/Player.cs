@@ -55,6 +55,15 @@ public class Player : MonoBehaviour
                 previousCheckpoint = currentCheckpoint;
             }
         }
+        else if (other.CompareTag("End"))
+        {
+            End end = other.GetComponent<End>();
+
+            if (end != null)
+            {
+                end.EndPressed();
+            }
+        }
     }
 
     public void Die()
