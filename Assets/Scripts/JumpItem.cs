@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnemoreJump : MonoBehaviour, IItem
+public class JumpItem : MonoBehaviour, IItem
 {
     private PlayerController player;
 
