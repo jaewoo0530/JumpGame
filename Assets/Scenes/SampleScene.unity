@@ -803,7 +803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverText: {fileID: 1538828102}
   clearText: {fileID: 307865055}
-  restartButton: {fileID: 0}
+  restartButton: {fileID: 1828428705}
 --- !u!4 &832021943
 Transform:
   m_ObjectHideFlags: 0
