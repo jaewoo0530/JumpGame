@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
     // 게임 재시작
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameOverText.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+        GameManager.Instance.RespawnPlayer();
     }
 }

@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
         if (other.CompareTag("DeadObject"))
         {
             playerAnimator.SetTrigger("Die");
-            Die();
         }
         else if (other.TryGetComponent<IItem>(out var item))
         {
@@ -73,9 +72,6 @@ public class Player : MonoBehaviour
     {
         // 현재 플레이어 파괴
         Destroy(gameObject);
-
-        // 리스폰 처리
-        RespawnPlayer();
 
         uiManager.ShowGameOver();
     }
