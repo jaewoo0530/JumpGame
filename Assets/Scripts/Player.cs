@@ -4,10 +4,12 @@ public class Player : MonoBehaviour
 {
     private Animator playerAnimator;
     private CheckPoint previousCheckpoint; // 이전 체크포인트 추적
+    private UIManager uiManager;
 
     private void Awake()
     {
         playerAnimator = GetComponent<Animator>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     private void Start()
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("DeadObject"))
         {
             playerAnimator.SetTrigger("Die");
+            Die();
         }
         else if (other.TryGetComponent<IItem>(out var item))
         {
@@ -61,6 +64,7 @@ public class Player : MonoBehaviour
             if (end != null)
             {
                 end.EndPressed();
+                uiManager.ShowClear();
             }
         }
     }
@@ -72,5 +76,7 @@ public class Player : MonoBehaviour
 
         // 리스폰 처리
         RespawnPlayer();
+
+        uiManager.ShowGameOver();
     }
 }

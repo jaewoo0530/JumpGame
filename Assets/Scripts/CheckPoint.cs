@@ -11,8 +11,6 @@ public class CheckPoint : MonoBehaviour
 
     public void Save()
     {
-        GameManager.Instance.respawnPoint = transform;
-        Debug.Log("Checkpoint Updated to: " + transform.position);
         checkpointAnimator.SetBool("Idle", false);
         checkpointAnimator.SetBool("Activate", true);
         checkpointAnimator.SetBool("Deactivate", false);
