@@ -47,21 +47,33 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // PC에서 Space 키로 점프
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (groundCheck.IsGrounded)
-            {
-                PerformJump();
-                playerAnimator.SetBool("Jump", true);
-            }
-            else if (jumpCount > 0)
-            {
-                PerformJump();
-                playerAnimator.SetBool("DoubleJump", true);
-                JumpCount -= 1;
-            }
+            HandleJumpLogic();
         }
 
+        if (Input.GetKeyUp(KeyCode.Space) && playerRigidbody2D.velocity.y > 0)
+        {
+            playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, playerRigidbody2D.velocity.y * 0.5f);
+        }
+#endif
+
+#if UNITY_IOS || UNITY_ANDROID
+    // 모바일에서 터치로 점프
+    if (IsTouchJump())
+    {
+        HandleJumpLogic();
+    }
+
+    if (IsTouchReleased() && playerRigidbody2D.velocity.y > 0)
+    {
+        playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, playerRigidbody2D.velocity.y * 0.5f);
+    }
+#endif
+
+        // 공통: 낙하 애니메이션 처리
         if (playerRigidbody2D.velocity.y < 0 && !groundCheck.IsGrounded)
         {
             playerAnimator.SetBool("Jump", false);
@@ -69,18 +81,58 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetBool("Fall", true);
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && playerRigidbody2D.velocity.y > 0)
-        {
-            playerRigidbody2D.velocity = new Vector2(playerRigidbody2D.velocity.x, playerRigidbody2D.velocity.y * 0.5f);
-        }
-
-        if(groundCheck.IsGrounded)
+        // 공통: 착지 시 애니메이션 초기화
+        if (groundCheck.IsGrounded)
         {
             playerAnimator.SetBool("Jump", false);
             playerAnimator.SetBool("DoubleJump", false);
             playerAnimator.SetBool("Fall", false);
         }
     }
+
+    private void HandleJumpLogic()
+    {
+        if (groundCheck.IsGrounded)
+        {
+            PerformJump();
+            playerAnimator.SetBool("Jump", true);
+        }
+        else if (jumpCount > 0)
+        {
+            PerformJump();
+            playerAnimator.SetBool("DoubleJump", true);
+            jumpCount -= 1;
+        }
+    }
+
+    private bool IsTouchJump()
+    {
+        // 화면을 터치했는지 확인
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool IsTouchReleased()
+    {
+        // 화면에서 터치가 떼어진 경우 확인
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Ended)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private void PerformJump()
     {
