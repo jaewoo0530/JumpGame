@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2215092563209556380}
   - component: {fileID: 7367094834325052584}
   - component: {fileID: 5834233018126605431}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grass-right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 205336721558146012}
   - component: {fileID: 1257252992948923494}
   - component: {fileID: 6599579641803572722}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grass-left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 203021847978866550}
   - component: {fileID: 691892906205899647}
   - component: {fileID: 4170343199151099526}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grass-middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,9 +401,9 @@ GameObject:
   - component: {fileID: 5866144469371015634}
   - component: {fileID: 4554864861461120344}
   - component: {fileID: 7451771121899448996}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grass Block
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
