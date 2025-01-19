@@ -40,9 +40,27 @@ public class PlayerController : MonoBehaviour
     {
         float xInput = Input.GetAxis("Horizontal");
         Vector2 move = new Vector2(xInput * speed, playerRigidbody2D.velocity.y);
+
+        if (IsTouchingWall() && !groundCheck.IsGrounded && Mathf.Sign(xInput) == Mathf.Sign(playerRigidbody2D.velocity.x))
+        {
+            // 벽 방향으로 입력이 들어왔을 때 수평 이동 제거
+            move.x = 0;
+        }
+
         playerRigidbody2D.velocity = move;
 
         playerAnimator.SetBool("Run", xInput != 0);
+    }
+
+    private bool IsTouchingWall()
+    {
+        float direction = Input.GetAxis("Horizontal"); // 왼쪽(-1) 또는 오른쪽(1)
+        Vector2 position = transform.position;
+        Vector2 wallCheckDirection = new Vector2(direction, 0);
+
+        // 벽을 감지하기 위한 Raycast
+        RaycastHit2D hit = Physics2D.Raycast(position, wallCheckDirection, 0.1f, LayerMask.GetMask("Wall"));
+        return hit.collider != null;
     }
 
     private void HandleJump()
