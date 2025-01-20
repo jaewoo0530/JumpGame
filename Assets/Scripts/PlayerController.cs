@@ -49,19 +49,22 @@ public class PlayerController : MonoBehaviour
 
         playerRigidbody2D.velocity = move;
 
-        playerAnimator.SetBool("Run", xInput != 0);
+        playerAnimator.SetBool("Run", Mathf.Abs(xInput) > 0.01f);
     }
 
     private bool IsTouchingWall()
     {
-        float direction = Input.GetAxis("Horizontal"); // 왼쪽(-1) 또는 오른쪽(1)
-        Vector2 position = transform.position;
-        Vector2 wallCheckDirection = new Vector2(direction, 0);
+        float direction = Input.GetAxis("Horizontal");
+        if (Mathf.Approximately(direction, 0))
+            return false; // 입력이 없으면 감지 중단
 
-        // 벽을 감지하기 위한 Raycast
-        RaycastHit2D hit = Physics2D.Raycast(position, wallCheckDirection, 0.1f, LayerMask.GetMask("Wall"));
+        Vector2 rayOrigin = (Vector2)transform.position + new Vector2(direction * 0.5f, 0); // 캐릭터의 좌우 가장자리
+        float wallCheckDistance = 0.2f; // 레이 길이
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * Mathf.Sign(direction), wallCheckDistance, LayerMask.GetMask("Wall"));
+
         return hit.collider != null;
     }
+
 
     private void HandleJump()
     {
